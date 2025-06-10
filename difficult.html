@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>difficult</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Difficult Mode</h1>
+      <p id="difficult-greeting">difficult mode. goodluck! </p>
+    </header>
+
+        
+      <div id="liv">lives: ❤️❤️❤️</div>
+      <div id="timer-display" class="timer">time Left: 10s</div>
+       <div id="prog" class="progress">progress: 0/10</div>
+
+
+    <div id="game-area">
+      <div id="word-display"></div>
+      <div id="hint-display"></div>
+
+      <form id="guess-form">
+      
+        <button type="submit" class="btn">submit</button>
+         <button id="next" class="hidden">next</button>
+      </form>
+
+
+      <div id="message-display"></div>
+      <button id="restart-btn" class="btn hidden">play again</button>
+    </div>
+
+    <div id="talking-animal">
+      <img src="imgs/talk.png" alt="Assistant" id="animal-image" />
+      <div id="speech-bubble">
+        <p id="assistant-text">
+          difficult
+        </p>
+      </div>
+    </div>
+
+<div class="homebutton">
+  <a href="main.html" class="homelink">Home</a>
+</div>
+  </div>
+
+  <script>
+    const playerName = localStorage.getItem("currentUser");
+    if (playerName) {
+      document.getElementById("player-name").textContent = playerName;
+      document.getElementById("difficult-greeting").textContent = `lets begin, ${playerName}!`;
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

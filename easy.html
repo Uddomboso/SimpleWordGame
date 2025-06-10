@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Easy Mode</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="liv">Lives: ❤️❤️❤️</div>
+  <div id="prog" class="progress">progress: 0/10</div>
+
+  <div class="container">
+    <header class="header">
+      <h1>easy Mode</h1>
+      <p id="easy-greeting">good luck player!</p>
+    </header>
+
+    <div id="game-area">
+      <div id="word-display"></div>
+      <div id="hint-display"></div>
+
+      <form id="guess-form">
+        <button type="submit" class="btn">submit</button>
+      </form>
+
+      <button id="next" class="hidden">next</button>
+      <button id="restart-btn" class="btn hidden">play Again</button>
+    </div>
+
+    <div id="talking-animal">
+      <img src="imgs/talk.png" alt="Assistant" id="animal-image" />
+      <div id="speech-bubble">
+        <p id="assistant-text">
+          welcome to easy Mode! guess the missing letter.
+        </p>
+      </div>
+    </div>
+
+    <div class="homebutton">
+  <a href="main.html" class="homelink">Home</a>
+</div>
+  </div>
+
+  <script>
+    const playerName = localStorage.getItem("currentUser");
+    if (playerName) {
+      document.getElementById("player-name").textContent = playerName;
+      document.getElementById("easy-greeting").textContent = `Good luck, ${playerName}!`;
+    }
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>

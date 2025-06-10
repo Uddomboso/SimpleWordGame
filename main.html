@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Main Menu - Complete the Word</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Welcome, <span id="player-name"></span>!</h1>
+  <p>Select difficulty:</p>
+  <ul>
+    <li><a href="easy.html" class="btn-link">Easy Mode</a></li>
+    <li><a href="intermediate.html" class="btn-link">Intermediate Mode</a></li>
+    <li><a href="difficult.html" class="btn-link">Difficult Mode</a></li>
+  </ul>
+  <button id="logout-btn">Logout</button>
+
+  <script>
+    const playerName = localStorage.getItem("currentUser");
+    if (!playerName) {
+      window.location.href = "index.html"; // redirect if not logged in
+    } else {
+      document.getElementById("player-name").textContent = playerName;
+    }
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      localStorage.removeItem("currentUser");
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
