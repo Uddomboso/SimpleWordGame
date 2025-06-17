@@ -14,5 +14,4 @@ Open `index.html` in any modern browser.
 - Responsive UI design
 
 
-
-
+like demo: https://golden-valkyrie-d5025a.netlify.app/easy
