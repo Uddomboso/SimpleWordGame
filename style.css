@@ -495,3 +495,53 @@ ul li {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+
+
+/* media queries for smaller screens */
+@media (max-width: 600px) {
+  .container {
+    margin-top: 80px;
+  }
+
+  #word-display {
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .letter-input {
+    width: 25px;
+    font-size: 1rem;
+  }
+
+  #talking-animal {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #speech-bubble {
+    max-width: 100%;
+  }
+
+  #liv, #prog, #timer-display {
+    position: static;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+}
+
+@media (max-width: 400px) {
+  #word-display {
+    font-size: 1.2rem;
+  }
+
+  .letter-input {
+    width: 20px;
+    padding: 5px;
+  }
+
+  .btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
