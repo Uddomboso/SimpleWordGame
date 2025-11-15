@@ -2,7 +2,7 @@
 
 A beautiful browser-based word guessing game built using vanilla JavaScript, HTML, and CSS. Test your vocabulary skills with this engaging and visually appealing word puzzle game.
 
-![Word Game Demo](https://mboso.netlify.app)
+**Live Demo:** [mboso.netlify.app](https://mboso.netlify.app)
 
 ## 🎮 Features
 
