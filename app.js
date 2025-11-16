@@ -1,29 +1,47 @@
-// variables
+// game state variables
+// stores the remaining time in seconds for the current word
 let timeLeft = 30;
+// holds the interval id for the countdown timer
 let timerInterval = null;
+// tracks if the current word was guessed correctly
 let guessedCorrectly = false;
+// the current word the player needs to guess
 let currentWord = "";
+// array representing the word with underscores for missing letters
 let displayedWord = [];
+// array of indices where letters are missing in the word
 let missingIndices = [];
+// current number of lives remaining
 let lives = 3;
+// maximum number of lives allowed
 let maxLives = 3;
+// current difficulty level easy intermediate or difficult
 let difficulty = "";
+// hint text displayed to help the player
 let hint = "";
+// current game score
 let score = 0;
+// best score achieved for this difficulty level
 let highScore = 0;
+// array of words that have already been used in this game session
 let usedWords = [];
+// flag indicating if all words have been used
 let allWordsUsed = false;
 
-// for authentication
+// user authentication functions
+// retrieves all registered users from browser storage
 function getUsers() {
   let users = localStorage.getItem("users");
   return users ? JSON.parse(users) : {};
 }
 
+// saves the users object to browser storage
 function saveUsers(users) {
   localStorage.setItem("users", JSON.stringify(users));
 }
 
+// handles user registration
+// validates input and creates new user account
 function signup(event) {
   event.preventDefault();
   const username = document.getElementById("signup-username").value.trim();
@@ -43,6 +61,8 @@ function signup(event) {
   document.getElementById("signup-form").reset();
 }
 
+// handles user login
+// validates credentials and redirects to main menu on success
 function login(event) {
   event.preventDefault();
   const username = document.getElementById("login-username").value.trim();
@@ -56,6 +76,8 @@ function login(event) {
   }
 }
 
+// displays a message on the signup page
+// shows success message in green or error message in red
 function displaySignupMessage(msg, success = false) {
   const el = document.getElementById("signup-message");
   if (el) {
@@ -64,6 +86,8 @@ function displaySignupMessage(msg, success = false) {
   }
 }
 
+// displays a message on the login page
+// shows error message in red
 function displayLoginMessage(msg) {
   const el = document.getElementById("login-message");
   if (el) {
@@ -72,14 +96,20 @@ function displayLoginMessage(msg) {
   }
 }
 
-// word banks (basically random words varying in difficulty as i see fit)
+// word banks for each difficulty level
+// easy words are short and common
+// intermediate words are medium length
+// difficult words are long and challenging
 const wordBanks = {
   easy: ["apple", "mango", "bread", "chair", "house", "water", "table", "phone", "mouse", "light"],
   intermediate: ["library", "picture", "journey", "bicycle", "guitar", "diamond", "kitchen", "monitor", "garden", "window"],
   difficult: ["philosophy", "entrepreneur", "psychology", "mathematics", "architecture", "photography", "restaurant", "television", "helicopter", "celebrity"]
 };
 
-// game setup
+// initializes the game with default values
+// resets lives score and word list
+// determines difficulty from current page
+// loads high score and generates first word
 function setupGame() {
   lives = maxLives;
   score = 0;
@@ -98,6 +128,7 @@ function setupGame() {
   showInitialAssistantMessage();
 }
 
+// determines the difficulty level based on the current page url
 function determineDifficulty() {
   const path = window.location.pathname;
   if (path.includes("easy.html")) difficulty = "easy";
@@ -106,7 +137,10 @@ function determineDifficulty() {
   else difficulty = "easy";
 }
 
-// generating words
+// generates a new word for the player to guess
+// selects a random unused word from the appropriate difficulty bank
+// randomly hides letters based on difficulty level
+// creates hint text and starts timer for intermediate and difficult modes
 function generateWord() {
   const words = wordBanks[difficulty];
   
@@ -143,11 +177,14 @@ function generateWord() {
   updateProgress();
 }
 
+// generates a random integer between min and max inclusive
 function randInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// timre
+// timer functions
+// starts a countdown timer for intermediate and difficult modes
+// reduces lives when time runs out
 function startTimer() {
   timeLeft = 30;
   updateTimerDisplay();
@@ -170,12 +207,15 @@ function startTimer() {
   }, 1000);
 }
 
+// updates the timer display on the page
 function updateTimerDisplay() {
   const el = document.getElementById("timer-display");
   if (el) el.textContent = `Time Left: ${timeLeft}s`;
 }
 
-// user interface
+// renders the word display on the page
+// creates input fields for missing letters and spans for revealed letters
+// focuses the first input field for easy typing
 function renderWord() {
   let container = document.getElementById("word-display");
   if (!container) return;
@@ -203,33 +243,39 @@ function renderWord() {
   if (firstInput) firstInput.focus();
 }
 
+// updates the lives display with heart symbols
 function updateLives() {
   let el = document.getElementById("liv");
   if (el) el.textContent = `lives: ${"❤️".repeat(lives)}`;
 }
 
+// updates the hint text displayed to the player
 function updateHint() {
   let el = document.getElementById("hint-display");
   if (el) el.textContent = hint;
 }
 
+// updates the message display and shows assistant message
 function updateMessage(msg) {
   let el = document.getElementById("message-display");
   if (el) el.textContent = msg;
   showAssistant(msg);
 }
 
+// clears all input fields and focuses the first one
 function clearInput() {
   let inputs = document.querySelectorAll("#word-display input.letter-input");
   inputs.forEach(i => (i.value = ""));
   if (inputs.length > 0) inputs[0].focus();
 }
 
+// updates the high score display on the page
 function updateHighScore() {
   const el = document.getElementById("highscore-display");
   if (el) el.textContent = `High Score: ${highScore}`;
 }
 
+// updates the progress counter showing words completed
 function updateProgress() {
   const progressEl = document.getElementById("prog");
   if (progressEl) {
@@ -238,6 +284,7 @@ function updateProgress() {
   }
 }
 
+// loads the high score for current user and difficulty from storage
 function loadHighScore() {
   let user = localStorage.getItem("currentUser") || "Guest";
   let key = `${user}_${difficulty}_highscore`;
@@ -245,6 +292,7 @@ function loadHighScore() {
   highScore = hs ? parseInt(hs) : 0;
 }
 
+// saves the high score if current score is better
 function saveHighScore() {
   if (score > highScore) {
     let user = localStorage.getItem("currentUser") || "Guest";
@@ -254,7 +302,9 @@ function saveHighScore() {
   }
 }
 
-// talking assistant (the deer at the side)
+// talking assistant functions
+// displays messages from the animal character on screen
+// shows a welcome message when the game starts based on difficulty
 function showInitialAssistantMessage() {
   let message = "";
   if (difficulty === "easy") {
@@ -267,6 +317,7 @@ function showInitialAssistantMessage() {
   showAssistant(message);
 }
 
+// displays the assistant with a message for six seconds then hides it
 function showAssistant(message) {
   const assistant = document.getElementById("talking-animal");
   const textEl = document.getElementById("assistant-text");
@@ -279,6 +330,7 @@ function showAssistant(message) {
   }
 }
 
+// hides the assistant from view
 function hideAssistant() {
   const assistant = document.getElementById("talking-animal");
   if (assistant) {
@@ -330,10 +382,14 @@ function showGameCompletion() {
 }
 
 
+// checks if the player's guess is correct
+// validates that all inputs are filled
+// compares each guessed letter with the actual word
+// updates score and lives based on correctness
 function checkGuess(event) {
   event.preventDefault();
   
-  // validation (emty inputs)
+ // validation (emty inputs)
   const emptyInputs = Array.from(document.querySelectorAll("#word-display input.letter-input"))
     .filter(input => !input.value);
   if (emptyInputs.length > 0) {
@@ -383,7 +439,8 @@ function checkGuess(event) {
   updateHighScore();
 }
 
-// buttons
+// button visibility control functions
+// shows or hides game control buttons as needed
 function showRestartButton() {
   const btn = document.getElementById("restart-btn");
   if (btn) btn.classList.remove("hidden");
@@ -408,6 +465,7 @@ function restartGame() {
   setupGame();
 }
 
+// moves to the next word in the game
 function nextWord() {
   generateWord();
   guessedCorrectly = false;
@@ -419,7 +477,9 @@ function nextWord() {
   hideNextButton();
 }
 
-// Input validation and navigation
+// input validation and navigation
+// ensures only letters can be entered
+// automatically moves focus to next input when a letter is typed
 document.addEventListener("input", function(e) {
   if (e.target.classList.contains("letter-input")) {
     e.target.value = e.target.value.replace(/[^a-zA-Z]/g, '');
@@ -432,7 +492,8 @@ document.addEventListener("input", function(e) {
   }
 });
 
-// Page load listeners
+// page load event listeners
+// sets up form handlers when the page loads
 window.addEventListener("load", () => {
   const signupForm = document.getElementById("signup-form");
   if (signupForm) signupForm.addEventListener("submit", signup);
@@ -448,9 +509,11 @@ window.addEventListener("load", () => {
   }
 });
 
-// for my backround music
+// background music control
+// creates audio object for background music that loops
 const bgAudio = new Audio("background.mp3");
 bgAudio.loop = true;
+// function to play or pause the background music
 function toggleMusic(on) {
   if (on) bgAudio.play();
   else bgAudio.pause();
