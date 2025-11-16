@@ -507,6 +507,17 @@ ul li {
     width: calc(100vw - 40px);
   }
 
+  .login-form {
+    padding: 30px 20px;
+    width: calc(100vw - 40px);
+    max-width: 90vw;
+  }
+
+  .login-form h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
   .form-container h1 {
     font-size: 1.5rem;
     margin-bottom: 20px;
@@ -621,6 +632,11 @@ ul li {
   }
 
   .form-container {
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .login-form {
     width: 90%;
     max-width: 400px;
   }
@@ -749,7 +765,9 @@ ul li {
   border-radius: 16px;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   width: 320px;
+  max-width: 90vw;
   text-align: center;
+  margin: 20px;
 }
 
 .login-form h2 {
@@ -807,6 +825,13 @@ ul li {
 
 .login-form a:hover {
   text-decoration: underline;
+}
+
+#login-message {
+  margin-top: 15px;
+  font-weight: bold;
+  min-height: 1.2em;
+  color: red;
 }
 
 
