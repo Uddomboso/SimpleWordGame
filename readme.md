@@ -4,7 +4,7 @@ A beautiful, responsive browser-based word guessing game built with vanilla Java
 
 **Live Demo:** [mboso.netlify.app](https://mboso.netlify.app)
 
-## 📸 Screenshots
+## Screenshots
 
 ### Login and Signup Page
 ![Login and Signup](imgs/loginsignup.png)
@@ -18,7 +18,7 @@ After logging in, players are greeted with a welcome message and can choose from
 ![Difficult Mode with Assistant](imgs/difficultassistant.png)
 During gameplay, a friendly assistant appears with helpful hints and encouragement. The assistant provides context-specific messages based on your progress and difficulty level.
 
-## 🎮 Features
+## Features
 
 ### User Authentication
 - **Sign Up**: Create a new account with a username and password
@@ -100,51 +100,37 @@ During gameplay, a friendly assistant appears with helpful hints and encourageme
 - **Auto-hide** after 6 seconds to keep the screen uncluttered
 - **Speech bubble design** with smooth animations
 
-## 🚀 How to Run
+## How to Run
 
-### Option 1: Direct Browser Opening
+### Direct Browser Opening
 1. **Download or clone** this repository
 2. **Open `index.html`** in any modern web browser (Chrome, Firefox, Edge, Safari)
 3. **No installation required** - the game runs entirely in your browser
 
-### Option 2: Local Server (Recommended)
-1. **Download or clone** this repository
-2. **Navigate to the project folder** in your terminal
-3. **Start a local server**:
-   - Python: `python -m http.server 8000`
-   - Node.js: `npx http-server`
-   - VS Code: Use the "Live Server" extension
-4. **Open** `http://localhost:8000` in your browser
-
-### Option 3: Deploy to Netlify
-1. **Push your code** to a GitHub repository
-2. **Connect** your repository to Netlify
-3. **Deploy** - Netlify will automatically build and host your site
-4. **Access** your live site at `your-site.netlify.app`
 
 ## 📁 Project Structure
 
 ```
 SimpleWordGame/
 │
-├── index.html          # Login page
-├── signup.html         # User registration page
-├── main.html           # Main menu after login
-├── easy.html           # Easy difficulty game page
-├── intermediate.html    # Intermediate difficulty game page
-├── difficult.html      # Difficult game page
-├── app.js              # Main JavaScript file with all game logic
-├── style.css           # All styling and responsive design
-├── readme.md           # This file
+├── index.html          # login page
+├── signup.html         # user registration page
+├── main.html           # main menu after login
+├── easy.html           # easy difficulty game page
+├── intermediate.html    # intermediate difficulty game page
+├── difficult.html      # difficult game page
+├── app.js              # main JavaScript file with all game logic
+├── style.css           # all styling and responsive design
+├── readme.md           # this file
 │
-└── imgs/               # Image assets
-    ├── talk.png       # Assistant character image
-    ├── loginsignup.png # Screenshot of login/signup page
-    ├── mainmenu.png    # Screenshot of main menu
-    └── difficultassistant.png # Screenshot of gameplay
+└── imgs/               # image assets
+    ├── talk.png       # assistant character image
+    ├── loginsignup.png # screenshot of login/signup page
+    ├── mainmenu.png    # screenshot of main menu
+    └── difficultassistant.png # screenshot of gameplay
 ```
 
-## 🎯 How to Play
+## How to Play
 
 1. **Sign Up**: Create a new account on the signup page
 2. **Login**: Enter your credentials to access the game
@@ -161,17 +147,17 @@ SimpleWordGame/
 - **Time Management**: In timed modes, work quickly but accurately
 - **Practice**: The more you play, the better you'll get at recognizing word patterns
 
-## 🛠️ Technical Details
+## Technical Details
 
 ### Technologies Used
 - **HTML5**: Semantic markup and structure
 - **CSS3**: Modern styling with flexbox, media queries, and animations
 - **Vanilla JavaScript**: No frameworks or libraries required
 - **LocalStorage API**: For persistent data storage
-- **Responsive Design**: Mobile-first CSS approach
+- **Responsive Design**: Mobile first CSS approach
 
 ### Browser Compatibility
-- Chrome (recommended)
+- Chrome 
 - Firefox
 - Edge
 - Safari
@@ -204,7 +190,7 @@ SimpleWordGame/
 - **Current User**: Stored as `"currentUser"` in localStorage
 - **High Scores**: Stored per user and difficulty as `"{username}_{difficulty}_highscore"`
 
-## 🎨 Customization
+##  Customization
 
 ### Adding New Words
 Edit the `wordBanks` object in `app.js`:
@@ -229,11 +215,7 @@ Modify these values in `app.js`:
 - Timer duration (currently 30 seconds)
 - Number of lives (currently 3)
 
-## 📝 License
-
-This project is open source and available for personal and educational use.
-
-## 🤝 Contributing
+## 🤝🏾 Contributing
 
 Contributions are welcome! Feel free to:
 - Report bugs
