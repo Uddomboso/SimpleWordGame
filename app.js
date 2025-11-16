@@ -31,13 +31,24 @@ let allWordsUsed = false;
 // user authentication functions
 // retrieves all registered users from browser storage
 function getUsers() {
-  let users = localStorage.getItem("users");
-  return users ? JSON.parse(users) : {};
+  try {
+    let users = localStorage.getItem("users");
+    return users ? JSON.parse(users) : {};
+  } catch (error) {
+    console.error("Error reading users from storage:", error);
+    return {};
+  }
 }
 
 // saves the users object to browser storage
 function saveUsers(users) {
-  localStorage.setItem("users", JSON.stringify(users));
+  try {
+    localStorage.setItem("users", JSON.stringify(users));
+    console.log("Users saved successfully:", Object.keys(users));
+  } catch (error) {
+    console.error("Error saving users to storage:", error);
+    alert("Error saving user data. Please check if localStorage is enabled.");
+  }
 }
 
 // handles user registration
@@ -57,8 +68,15 @@ function signup(event) {
   }
   users[username] = password;
   saveUsers(users);
-  displaySignupMessage("Signup successful! You can now log in.", true);
-  document.getElementById("signup-form").reset();
+  
+  // verify the save worked
+  let verifyUsers = getUsers();
+  if (verifyUsers[username] === password) {
+    displaySignupMessage("Signup successful! You can now log in.", true);
+    document.getElementById("signup-form").reset();
+  } else {
+    displaySignupMessage("Error: Account was not saved. Please try again.");
+  }
 }
 
 // handles user login
@@ -67,7 +85,16 @@ function login(event) {
   event.preventDefault();
   const username = document.getElementById("login-username").value.trim();
   const password = document.getElementById("login-password").value;
+  
+  if (!username || !password) {
+    displayLoginMessage("Please enter both username and password.");
+    return;
+  }
+  
   let users = getUsers();
+  console.log("Attempting login for:", username);
+  console.log("Stored users:", Object.keys(users));
+  
   if (users[username] === password) {
     localStorage.setItem("currentUser", username);
     window.location.href = "main.html";
