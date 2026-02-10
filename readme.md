@@ -1,7 +1,6 @@
 # Simple Word Game
 
-A beautiful, responsive browser-based word guessing game built with vanilla JavaScript, HTML, and CSS. Test your vocabulary skills by guessing missing letters in words across three difficulty levels. Features user authentication, score tracking, and an interactive assistant to guide you through the game.
-
+responsive browser-based word guessing game built with vanilla JavaScript, HTML, and CSS. 
 **Live Demo:** [mboso.netlify.app](https://mboso.netlify.app)
 
 ## Screenshots
